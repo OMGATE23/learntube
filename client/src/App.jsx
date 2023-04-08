@@ -9,6 +9,7 @@ import PlaylistView from "./pages/PlaylistView"
 import EnrolledPlaylist from "./pages/EnrolledPlaylist"
 import PlaylistWatch from "./pages/PlaylistWatch"
 import LandingPage from "./pages/LandingPage"
+import Onboarding from "./pages/Onboarding"
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
         {
           path : 'signin',
           element : <SignIn/>
+        },
+        {
+          path : 'onboarding',
+          element : <Onboarding/>
         },
         {
           path : 'explore',
@@ -53,7 +58,7 @@ function App() {
     }
   ])
   return (
-    <div className="App">
+    <div className="App font-poppins">
       <RouterProvider router = {router}/>
     </div>
   )
