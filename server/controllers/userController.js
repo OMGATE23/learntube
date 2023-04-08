@@ -43,7 +43,6 @@ exports.getUser = async (req, res) => {
     const { id } = req.body
 
     const user = await User.findById(id);
-    console.log(user);
     if (!user) {
       return res.status(400).json({
         message: "User not found.",
@@ -101,7 +100,7 @@ exports.enrollPlaylist = async(req,res) => {
         }
     
         const user = await User.findById(userId);
-    
+
         user.enrolled_playlists.push(playlistId)
 
         const userProgress = await UserProgress.create({
@@ -121,4 +120,22 @@ exports.enrollPlaylist = async(req,res) => {
           message: err.message,
         });
       }
+}
+
+exports.findUserByEmail = async (name , email) => {
+  try {
+    
+    let user = await User.findOne({email})
+
+
+    if(!user){
+      user = await User.create({
+        name , email
+      })
+    }
+    return  {success: true, user} 
+  } catch(err) {
+    console.log(err)
+    return {success: false, message: err.message}
+  }
 }
