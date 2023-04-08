@@ -1,8 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DocumentIcon ,ComputerDesktopIcon , MagnifyingGlassIcon , VideoCameraIcon , ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import { auth } from "../../config/firebase";
 
 const Sidebar = () => {
+
+  const navigate = useNavigate();
+
+  async function logout() {
+    try {
+      await auth.signOut();
+      localStorage.clear();
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className=" sticky top-0 left-0 h-[100vh] w-[5rem] lg:w-[20%] flex items-center border-r-4 border-gray-200">
       
@@ -40,14 +54,17 @@ const Sidebar = () => {
             </span>
           </div>
         </Link>
-        <Link to="" className="block">
+        <button 
+          className="block"
+          onClick={logout}
+        >
           <div className="flex justify-center lg:justify-start gap-4  w-2/3 mx-auto my-4 lg:my-0">
             <ArrowRightOnRectangleIcon className="w-[26px] lg:w-[20px]" width={20} />
             <span className="hidden lg:block  py-3 text-center text-xl ">
               Sign Out
             </span>
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   );

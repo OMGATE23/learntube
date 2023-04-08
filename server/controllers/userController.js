@@ -37,17 +37,47 @@ exports.createUser = async (req, res) => {
   }
 };
 
+exports.findOrcreateUserIfNotFound = async (req, res) => {
+  try {
+    const { email, name } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        requestBody: req.body,
+        message: "Email not provided",
+      });
+    }
+
+    if (!name) {
+      return res.status(400).json({
+        requestBody: req.body,
+        message: "Name not provided",
+      });
+    }
+
+    let user = await User.findOne({email})
+
+    if(!user){
+      user = await User.create({
+        name , email
+      })
+    }
+    
+    return res.status(200).json({
+        success : true,
+        user
+    })
+  } catch (err) {
+    return res.json({
+      error: err.message,
+    });
+  }
+};
+
 
 exports.getUser = async (req, res) => {
   try {
-    const { id } = req.body
-
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(400).json({
-        message: "User not found.",
-      });
-    }
+    const user = req.user;
 
     return res.status(200).json({
       success: true,
@@ -122,7 +152,7 @@ exports.enrollPlaylist = async(req,res) => {
       }
 }
 
-exports.findUserByEmail = async (name , email) => {
+exports.findOrCreateUserByEmail = async (name , email) => {
   try {
     
     let user = await User.findOne({email})

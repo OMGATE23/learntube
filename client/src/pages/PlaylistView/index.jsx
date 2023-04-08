@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../data/playlistData.json";
 import Sidebar from "../../components/Sidebar";
 import {
@@ -6,10 +6,22 @@ import {
   ArrowRightIcon,
   ArrowDownOnSquareIcon,
 } from "@heroicons/react/24/outline";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const PlaylistView = () => {
   const [lower, setLower] = useState(0);
   const [upper, setUpper] = useState(19);
+
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/")
+    }
+  }, [user]);
+
   let displayList = data.contents;
   displayList = displayList.slice(lower, upper);
   return (
