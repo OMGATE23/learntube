@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../data/playlistData.json";
 import Sidebar from "../../components/Sidebar";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const PlaylistWatch = () => {
   const [lower, setLower] = useState(0);
   const [upper, setUpper] = useState(19);
   
   const [showMore , setShowMore] = useState(false)
+
+
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/")
+    }
+  }, [user]);
+
   let displayList = data.contents;
   console.log(displayList)
   const [currentVideo , setCurrentVideo] = useState(displayList[0].video.videoId)

@@ -10,6 +10,7 @@ import EnrolledPlaylist from "./pages/EnrolledPlaylist"
 import PlaylistWatch from "./pages/PlaylistWatch"
 import LandingPage from "./pages/LandingPage"
 import Onboarding from "./pages/Onboarding"
+import { AuthContextProvider } from "./context/AuthContext"
 
 
 function App() {
@@ -59,7 +60,9 @@ function App() {
   ])
   return (
     <div className="App font-poppins">
-      <RouterProvider router = {router}/>
+      <AuthContextProvider>
+        <RouterProvider router = {router}/>
+      </AuthContextProvider>
     </div>
   )
 }

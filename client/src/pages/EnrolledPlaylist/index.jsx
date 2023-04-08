@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar'
 import data from '../../data/enrolledPlaylists.json'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
+
 const EnrolledPlaylist = () => {
-    
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/")
+    }
+  }, [user]);
+
   return (
     <div className='flex'>
         <Sidebar/>

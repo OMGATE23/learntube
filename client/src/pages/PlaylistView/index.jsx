@@ -8,12 +8,16 @@ import {
 } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
 import { getPlaylistById } from "../../helper";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const PlaylistView = () => {
   const [lower, setLower] = useState(0);
   const [upper, setUpper] = useState(19);
   const [data, setData] = useState([]);
-  let displayList = data;
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
   displayList = data.slice(lower, upper);
   const { id } = useParams();
 
@@ -25,6 +29,17 @@ const PlaylistView = () => {
 
     getData();
   }, []);
+
+  
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/")
+    }
+  }, [user]);
+
+  let displayList = data;
+  displayList = displayList.slice(lower, upper);
   return (
     <div className="flex">
       <Sidebar />

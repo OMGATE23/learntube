@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../../components/Sidebar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { getPlaylistBySearch } from "../../helper";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Search = () => {
   const [query , setQuery] = useState('')
   const [data, setData] = useState([])
+
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!user) {
+      navigate("/")
+    }
+  }, [user]);
+
   async function handleSearch(){
     if(query){
       const playlistData = await getPlaylistBySearch(query)
