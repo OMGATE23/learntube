@@ -77,14 +77,7 @@ exports.findOrcreateUserIfNotFound = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const { id } = req.body
-
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(400).json({
-        message: "User not found.",
-      });
-    }
+    const user = req.user;
 
     return res.status(200).json({
       success: true,

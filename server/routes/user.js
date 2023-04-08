@@ -10,11 +10,12 @@ const {
   updateProgress,
   getProgress,
 } = require("../controllers/userProgressController");
+const isAuthorized = require("../middleware/auth");
 const router = express.Router();
 
 router.route("/register").post(createUser);
 router.route("/signin").post(findOrcreateUserIfNotFound);
-router.route("/getuser").get(getUser);
+router.route("/getuser").get(isAuthorized, getUser);
 router.route("/category").put(updateCategory);
 router.route("/enroll").put(enrollPlaylist);
 router.route("/updateprogress").put(updateProgress);
