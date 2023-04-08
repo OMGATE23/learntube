@@ -32,7 +32,7 @@ const SignIn = () => {
 
       localStorage.setItem(
         "user",
-        JSON.stringify({ ...apiRes.data, avatarUrl: userBody.displayPicture })
+        JSON.stringify({ ...apiRes.data.user, avatarUrl: userBody.displayPicture })
       );
 
       navigate("/dashboard");
