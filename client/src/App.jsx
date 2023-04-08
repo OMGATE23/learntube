@@ -39,7 +39,7 @@ function App() {
           element : <Search/>
         },
         {
-          path : 'playlistview',
+          path : 'playlistview/:id',
           element : <PlaylistView/>
         },
         {

@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
-import data from '../../data/explorePlaylist.json'
+import { getPlaylistBySearch } from "../../helper";
 
 const Search = () => {
+  const [query , setQuery] = useState('')
+  const [data, setData] = useState([])
+  async function handleSearch(){
+    if(query){
+      const playlistData = await getPlaylistBySearch(query)
+      setData(playlistData.contents)
+    }
+  }
+
   return (
     <div className="flex">
       <Sidebar />
@@ -15,8 +25,9 @@ const Search = () => {
               className="outline outline-1 px-4 text-gray-800 outline-gray-600 rounded-xl bg-gray-100 w-4/5 h-[2.5rem]"
               type="text"
               placeholder="Search Playlists"
+              onChange = {(e) => setQuery(e.target.value)}
             />
-            <button className="text-lg border flex gap-1 border-gray-700 py-2 px-4 rounded-xl">
+            <button onClick={handleSearch} className="text-lg border flex gap-1 border-gray-700 py-2 px-4 rounded-xl">
               {" "}
               <MagnifyingGlassIcon width={20} />{" "}
               <span className="hidden md:block">Search</span>
@@ -25,8 +36,7 @@ const Search = () => {
         </div>
         <div className='grid grid-cols-1 w-[80%] mx-auto my-4 mb-12 lg:grid-cols-3 gap-4 justify-items-center'>
         {
-            data.map(playlist => {
-                console.log(playlist.playlist)
+            data && data.map(playlist => {
                 let {channelName , playlistId , thumbnails,  title , videoCount} = playlist.playlist
 
                 if(title.length > 30){
@@ -37,12 +47,12 @@ const Search = () => {
                     channelName = channelName.substring(0 , 17) + "..."
                 }
                 return(
-                    <a href="" key = {playlistId} className=' transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer hover:bg-gray-100'>
+                    <Link to={"/playlistview/" + playlistId} key = {playlistId} className=' transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer hover:bg-gray-100'>
                         <img src = {thumbnails[3].url} alt = {title}/>
                         <p className='text-lg mt-4'>{title}</p>
                         <p className='text-gray-700'>{channelName}</p>
                         <p>No of videos : {videoCount}</p>
-                    </a>
+                    </Link>
                 )
             })
         }
