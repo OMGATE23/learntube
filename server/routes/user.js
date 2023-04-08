@@ -4,6 +4,7 @@ const {
   getUser,
   updateCategory,
   enrollPlaylist,
+  findOrcreateUserIfNotFound,
 } = require("../controllers/userController");
 const {
   updateProgress,
@@ -12,6 +13,7 @@ const {
 const router = express.Router();
 
 router.route("/register").post(createUser);
+router.route("/signin").post(findOrcreateUserIfNotFound);
 router.route("/getuser").get(getUser);
 router.route("/category").put(updateCategory);
 router.route("/enroll").put(enrollPlaylist);
