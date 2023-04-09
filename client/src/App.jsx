@@ -40,7 +40,7 @@ function App() {
           element : <Search/>
         },
         {
-          path : 'playlistview',
+          path : 'playlistview/:id',
           element : <PlaylistView/>
         },
         {
@@ -48,7 +48,7 @@ function App() {
           element : <EnrolledPlaylist/>
         },
         {
-          path : 'playlistwatch',
+          path : 'playlistwatch/:id',
           element : <PlaylistWatch/>
         },
         {

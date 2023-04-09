@@ -19,6 +19,6 @@ router.route("/getuser").get(isAuthorized, getUser);
 router.route("/category").put(updateCategory);
 router.route("/enroll").put(enrollPlaylist);
 router.route("/updateprogress").put(updateProgress);
-router.route("/getprogress").get(getProgress);
+router.route("/getprogress/:playlistId").get( isAuthorized, getProgress);
 
 module.exports = router;

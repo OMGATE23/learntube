@@ -7,23 +7,21 @@ const isAuthorized = async (req, res, next) => {
 
     const decodedToken = await admin.auth().verifyIdToken(token);
 
-    console.log(decodedToken);
-
     if (decodedToken) {
       let userRes = await findOrCreateUserByEmail(decodedToken.name, decodedToken.email);
 
       if(!userRes.success) {
-        return res.status(401).json({ success: false, message: "Unauthorized" });
+        return res.status(401).json({ success: false, message: "Unauthorized" , header : req.headers});
       }
 
       req.user = userRes.user;
       return next();
     }
 
-    return res.status(401).json({ success: false, message: "Unauthorized" });
+    return res.status(401).json({ success: false, message: "Unauthorized" , header : req.headers});
   } catch (err) {
     console.log(err);
-    return res.status(401).json({ success: false, message: "Unauthorized" });
+    return res.status(401).json({ success: false, message: "Unauthorized" , header : req.headers});
   }
 };
 
