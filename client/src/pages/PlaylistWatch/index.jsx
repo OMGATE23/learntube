@@ -78,7 +78,7 @@ const PlaylistWatch = () => {
           </h1>
           <div className=" flex mt-8 flex-col lg:flex-row">
             <div className=" w-[90%] lg:w-2/3 mb-12 mx-auto  lg:ml-8">
-              <div className="bg-gray-200 shadow-xl mx-auto py-4 px-6">
+              <div className="shadow-xl mx-auto py-4 px-6 border border-gray-500 bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50">
                 <iframe
                   className="w-full aspect-video"
                   src={"https://www.youtube.com/embed/" + currentVideo}
@@ -87,7 +87,7 @@ const PlaylistWatch = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
-                <p className="text-2xl font-medium ml-4 mt-2 mb-2">
+                <p className="text-2xl font-medium ml-4 mt-2 mb-2 text-gray-300">
                   {data?.title}
                 </p>
                 {/* {data && (
@@ -98,7 +98,7 @@ const PlaylistWatch = () => {
                   </p>
                 )} */}
                 <button
-                  className="ml-4"
+                  className="ml-4 text-gray-400"
                   onClick={() => setShowMore((prev) => !prev)}
                 >
                   Show {!showMore ? <span>More</span> : <span>Less</span>}
