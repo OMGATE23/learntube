@@ -2,7 +2,7 @@ import React from "react";
 import Confetti from "react-confetti";
 import ReactDOM from "react-dom";
 
-const index = () => {
+const ConfettiContainer = () => {
   return ReactDOM.createPortal(
     <Confetti
       width={window.innerWidth - 100}
@@ -13,4 +13,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default ConfettiContainer;

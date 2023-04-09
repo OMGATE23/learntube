@@ -10,7 +10,7 @@ import { API_URL } from "../../helpers/constants";
 import Loader from "../../components/Loader";
 import { showToast } from "../../helpers/showtoast";
 import Modal from "../../components/TweetShareModal";
-import Confetti from "../../components/Confetti";
+import ConfettiContainer from "../../components/Confetti";
 
 const PlaylistWatch = () => {
   const [lower, setLower] = useState(0);
@@ -207,7 +207,7 @@ const PlaylistWatch = () => {
               data?.title ?? "Yotube"
             } playlist 🎊 Join my journey!`}
           />
-          <Confetti />
+          <ConfettiContainer />
         </>
       )}
     </div>
