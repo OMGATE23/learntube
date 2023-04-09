@@ -22,6 +22,7 @@ const PlaylistView = () => {
 
   function enrollPlaylist(){
     enrollPlaylistById(id)
+    navigate(`/playlistwatch/${id}`)
   }
 
   useEffect(() => {
@@ -44,13 +45,13 @@ const PlaylistView = () => {
       <Sidebar />
       <div className="w-[70%] mx-auto">
         <div className="w-[70%] mx-auto">
-          <h1 className="  my-6 text-gray-900 text-4xl font-semibold">
+          <h1 className="text-white my-6 text-4xl font-semibold">
             {data.title}
           </h1>
-          <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-slate-200">
+          <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-green-600">
             {" "}
-            <ArrowDownOnSquareIcon width={20} />{" "}
-            <span className="hidden md:block">Enroll Me</span>
+            <ArrowDownOnSquareIcon width={20} className="text-white" />{" "}
+            <span className="hidden md:block text-white">Enroll Me</span>
           </button>
         </div>
 
@@ -65,8 +66,8 @@ const PlaylistView = () => {
                 >
                   <img src={thumbnails[1].url} alt={title} />
                   <div className="text-center lg:text-left">
-                    <p>{title}</p>
-                    <p>{lengthText}</p>
+                    <p className="text-gray-200">{title}</p>
+                    <p className="text-gray-400">{lengthText}</p>
                   </div>
                 </div>
               );
@@ -76,7 +77,7 @@ const PlaylistView = () => {
         {data && (
           <div className="flex w-fit mx-auto gap-6  my-6">
             <button
-              className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed"
+              className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed text-white hover:text-black"
               disabled={lower === 0}
               onClick={() => {
                 setLower((prev) => prev - 20);
@@ -88,7 +89,7 @@ const PlaylistView = () => {
               Prev
             </button>
             <button
-              className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed"
+              className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed text-white hover:text-black"
               disabled={upper === data.length - 1}
               onClick={() => {
                 setUpper((prev) => {
