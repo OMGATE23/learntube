@@ -1,11 +1,11 @@
-# **LearnTube - Unlock the Power of YouTube Learning with Our Course-Boosting App!**
+# **LearnTube - Unlock the Power of YouTube Learning with Our Course-Boosting App! 👩‍🎓**
 ![WhatsApp Image 2023-04-09 at 11 23 37](https://user-images.githubusercontent.com/41827102/230762848-37cad02f-73ee-47c7-8861-90d5c6141020.jpg)
 
-## **About**
+## **About 🚀**
 
 **LearnTube** is a free online education app that allows learners to access high-quality course playlists on YouTube and track their progress with an analysis dashboard. The app provides learners with data on their learning progress, including time spent on each video, quiz scores, and overall progress. This analysis helps learners stay motivated and accountable for their learning goals.
 
-### **Features**
+### **Features ✨**
 
 - Seamless onboarding experience for users
 - Courses divided into categories for easy browsing and enrollment
@@ -13,13 +13,13 @@
 - Personalized course recommendations based on learners' interests and learning styles (coming soon)
 - Social features for connecting with other learners and sharing progress (coming soon)
 
-### **Technologies Used**
+### **Technologies Used 💻**
 
 - React for the front-end
 - Node.js for the back-end
 - YouTube's API for course playlist integration and video/channel data retrieval
 
-## **Getting Started**
+## **Getting Started 👋**
 
 To run the app locally, you'll need to have Node.js and Git installed on your machine. Once you have these installed, follow these steps:
 
@@ -30,7 +30,7 @@ To run the app locally, you'll need to have Node.js and Git installed on your ma
 5. Start the app using **`npm start`**
 6. Navigate to **`http://localhost:3000`** to view the app in your browser
 
-## **Contributing**
+## **Contributing 🤝**
 
 We welcome contributions from the community! To contribute to the project, please follow these steps:
 
@@ -40,6 +40,6 @@ We welcome contributions from the community! To contribute to the project, pleas
 4. Push your changes to your fork using **`git push origin my-feature-branch`**
 5. Submit a pull request to the main repo and wait for review and approval
 
-## **License**
+## **License 🛡**
 
 This app is licensed under the MIT License. See the **`LICENSE`** file for more information.
