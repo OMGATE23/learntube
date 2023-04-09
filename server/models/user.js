@@ -12,6 +12,10 @@ const UserSchema = new mongoose.Schema({
         unique : [true , "Email already in use."]
     } , 
 
+    points : {
+        type : Number,
+        default : 0,
+    },
 
     category : {
         type : String

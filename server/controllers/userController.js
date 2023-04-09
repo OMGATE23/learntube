@@ -169,3 +169,42 @@ exports.findOrCreateUserByEmail = async (name , email) => {
     return {success: false, message: err.message}
   }
 }
+
+exports.addPoint = async (req,res) => {
+  try {
+    const {_id, points} = req.user;
+
+    const newPoints = points + 1;
+
+    const user = await User.findById(_id);
+
+    user.points = newPoints
+
+    await user.save()
+    
+  } catch(err) {
+    console.log(err.message)
+    return res.json({
+      error  :err.message
+    })
+  }
+}
+
+exports.leaderBoard = async (req , res) => {
+  try {
+    let users = await User.find()
+    users = users.sort((a, b) => b.points - a.points);
+    users = users.slice(0 , 10)
+    return res.status(200).json({
+      length : users.length,
+      users
+
+    })
+
+
+  } catch(err) {
+    return res.json({
+      error : err.message
+    })
+  }
+}

@@ -5,6 +5,8 @@ const {
   updateCategory,
   enrollPlaylist,
   findOrcreateUserIfNotFound,
+  addPoint,
+  leaderBoard,
 } = require("../controllers/userController");
 const {
   updateProgress,
@@ -22,5 +24,7 @@ router.route("/enroll").put(enrollPlaylist);
 router.route("/updateprogress").put(updateProgress);
 router.route("/dashboard").get( isAuthorized , getUserAllProgress)
 router.route("/getprogress/:playlistId").get( isAuthorized, getProgress);
+router.route("/addpoint").put(isAuthorized , addPoint )
+router.route("/leaderboard").get(leaderBoard)
 
 module.exports = router;
