@@ -23,13 +23,13 @@ const PlaylistWatch = () => {
 
   async function handleProgress(videoId) {
     const response = await updateVideoProgress(id, videoId);
+    getProgress();
   }
 
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       navigate("/");
     }
-
     if (user) {
       getProgress();
     }
@@ -68,6 +68,7 @@ const PlaylistWatch = () => {
   }, [data]);
   displayList = data?.contents;
   displayList = displayList?.slice(lower, upper);
+  const doneVideos = progressVideoList.map(el => el.videoId);
   return (
     <div className="flex">
       <Sidebar />
@@ -130,8 +131,8 @@ const PlaylistWatch = () => {
                               e.target.disabled = true;
                               
                             }}
-                            checked = {progressVideoList.includes(videoId)}
-                            disabled = { progressVideoList.includes(videoId)}
+                            checked = {doneVideos.includes(videoId)}
+                            disabled = { doneVideos.includes(videoId)}
                           />
                           <div
                             onClick={() => setCurrentVideo(videoId)}
