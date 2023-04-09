@@ -84,7 +84,12 @@ const SignIn = () => {
               disabled
               className="block bg-gray-300 mt-4 transition-all duration-200 border-2 w-fit py-2 px-6 text-lg font-normal rounded-md mx-auto cursor-not-allowed"
             >
-              <img src="./googleicon.png" width="20" height="20" />
+              <img
+                src="./googleicon.png"
+                width="20"
+                height="20"
+                className="inline-block mr-3"
+              />
               Signing in ...
             </button>
           )}
