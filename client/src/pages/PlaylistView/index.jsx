@@ -11,6 +11,7 @@ import { enrollPlaylistById, getPlaylistById } from "../../helper";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
+import { showToast } from "../../helpers/showtoast,js";
 
 const PlaylistView = () => {
   const [lower, setLower] = useState(0);
@@ -22,8 +23,9 @@ const PlaylistView = () => {
 
   const { id } = useParams();
 
-  function enrollPlaylist(){
-    enrollPlaylistById(id)
+  async function enrollPlaylist(){
+    await enrollPlaylistById(id)
+    showToast("Enrolled successfully!")
     navigate(`/playlistwatch/${id}`)
   }
 
@@ -68,7 +70,7 @@ const PlaylistView = () => {
             {data.title}
           </h1>
           {
-            data?.contents && data.length > 0 && (
+            data?.contents && data?.contents.length > 0 && (
               <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-green-600">
             {" "}
             <ArrowDownOnSquareIcon width={20} className="text-white" />{" "}

@@ -8,6 +8,7 @@ import { getPlaylistById, updateVideoProgress } from "../../helper";
 import axios from "axios";
 import { API_URL } from "../../helpers/constants";
 import Loader from "../../components/Loader";
+import { showToast } from "../../helpers/showtoast,js";
 
 const PlaylistWatch = () => {
   const [lower, setLower] = useState(0);
@@ -25,6 +26,7 @@ const PlaylistWatch = () => {
 
   async function handleProgress(videoId) {
     const response = await updateVideoProgress(id, videoId);
+    showToast("Progress marked successfully!")
     getProgress();
   }
 
