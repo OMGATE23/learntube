@@ -3,7 +3,7 @@ import { API_URL } from "./helpers/constants";
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "b9879e1850mshf1077a3346ff045p19618ajsnb13d9e1ab40c",
+    "X-RapidAPI-Key": "96ff7fd609msh42f0999ddc4f585p157691jsn1f6a8eaf3666",
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
   },
 };
