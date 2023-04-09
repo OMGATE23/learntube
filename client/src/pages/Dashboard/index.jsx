@@ -56,7 +56,7 @@ const Dashboard = () => {
     return (
       <div className="flex">
         <Sidebar />
-        <div className="w-[90%">
+        <div className="w-[90%]">
           <Loader />
         </div>
       </div>
