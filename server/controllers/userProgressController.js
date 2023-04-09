@@ -1,4 +1,5 @@
 const UserProgress = require("../models/userProgress");
+const User = require('../models/user')
 
 exports.updateProgress = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ exports.updateProgress = async (req, res) => {
       });
     }
 
-    userProgress.video_id.push(videoId);
+    userProgress.video_id.push({videoId , date : Date.now() });
 
     await userProgress.save();
 
@@ -60,3 +61,27 @@ exports.getProgress = async (req, res) => {
     })
   }
 };
+
+exports.getUserAllProgress = async(req,res) => {
+  try {
+    const {_id} = req.user;
+
+    const user = await User.findById(_id);
+
+    const playlistIdList = user.enrolled_playlists;
+
+    const userProgress = await UserProgress.find({
+      user_id : _id
+    })
+
+    res.status(200).json({
+      success : true,
+      noOfPlaylistsEnrolled : playlistIdList.length , userProgress 
+    })
+
+  } catch(err){
+    res.json({
+      error : err.message
+    })
+  }
+}
