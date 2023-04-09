@@ -192,11 +192,12 @@ exports.addPoint = async (req,res) => {
 
 exports.leaderBoard = async (req , res) => {
   try {
-    let users = await User.find()
+    let users = await User.find();
+    const length = users.length
     users = users.sort((a, b) => b.points - a.points);
     users = users.slice(0 , 10)
     return res.status(200).json({
-      length : users.length,
+      length,
       users
 
     })

@@ -56,7 +56,7 @@ const Dashboard = () => {
     return (
       <div className="flex">
         <Sidebar />
-        <div className="w-[90%">
+        <div className="w-[90%]">
           <Loader />
         </div>
       </div>
@@ -77,10 +77,12 @@ const Dashboard = () => {
         </div>
 
         <div className="w-[30%] text-white flex flex-col items-center gap-8">
-          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
+          <div className="flex flex-col rounded-xl text-2xl justify-center gap-4 w-[250px] aspect-square text-center border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
+            <p className="text-3xl">📚</p>
             No.of Playlists <div className="text-5xl">{dashboardData.enrolledPlaylistCount}</div>
           </div>
-          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center px-2 border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
+          <div className="flex flex-col rounded-xl text-2xl justify-center gap-4 w-[250px] aspect-square text-center px-2 border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
+            <p className="text-3xl">📷</p>
             Videos Watched <div className="text-5xl">{dashboardData.videoCount}</div>
           </div>
         </div>

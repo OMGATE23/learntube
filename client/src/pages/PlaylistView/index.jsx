@@ -11,7 +11,7 @@ import { enrollPlaylistById, getPlaylistById } from "../../helper";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader";
-import { showToast } from "../../helpers/showtoast,js";
+import { showToast } from "../../helpers/showtoast";
 
 const PlaylistView = () => {
   const [lower, setLower] = useState(0);

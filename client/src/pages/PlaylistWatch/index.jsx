@@ -8,7 +8,9 @@ import { addPoint, getPlaylistById, updateVideoProgress } from "../../helper";
 import axios from "axios";
 import { API_URL } from "../../helpers/constants";
 import Loader from "../../components/Loader";
-import { showToast } from "../../helpers/showtoast,js";
+import { showToast } from "../../helpers/showtoast";
+import Modal from "../../components/TweetShareModal";
+import ConfettiContainer from "../../components/Confetti";
 
 const PlaylistWatch = () => {
   const [lower, setLower] = useState(0);
@@ -17,8 +19,9 @@ const PlaylistWatch = () => {
   const [data, setData] = useState(null);
   const [showMore, setShowMore] = useState(false);
   const [currentVideo, setCurrentVideo] = useState();
-  const [progressVideoList , setProgressVideoList] = useState([])
+  const [progressVideoList, setProgressVideoList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   let displayList;
 
   const { user } = useAuthContext();
@@ -26,8 +29,9 @@ const PlaylistWatch = () => {
 
   async function handleProgress(videoId) {
     const response = await updateVideoProgress(id, videoId);
-    showToast("Progress marked successfully!")
+    showToast("Progress marked successfully!");
     getProgress();
+    setShowModal(true);
     const responsePoints = await addPoint(user.accessToken)
     console.log(responsePoints)
     
@@ -52,7 +56,7 @@ const PlaylistWatch = () => {
         },
       });
       const data = await res.json();
-      setProgressVideoList(data.userProgress.video_id)
+      setProgressVideoList(data.userProgress.video_id);
     } catch (err) {
       console.log(err);
     }
@@ -73,10 +77,9 @@ const PlaylistWatch = () => {
   }, [data]);
   displayList = data?.contents || [];
   displayList = displayList?.slice(lower, upper);
-  const doneVideos = progressVideoList.map(el => el.videoId);
+  const doneVideos = progressVideoList.map((el) => el.videoId);
 
-
-  if(loading) {
+  if (loading) {
     return (
       <div className="flex">
         <Sidebar />
@@ -84,9 +87,8 @@ const PlaylistWatch = () => {
           <Loader />
         </div>
       </div>
-    )
+    );
   }
-
 
   return (
     <div className="flex">
@@ -136,7 +138,7 @@ const PlaylistWatch = () => {
                       }
                       return (
                         <div
-                          key={videoId}
+                          key={Math.random()}
                           className=" w-[90%] transition-colors duration-150 my-4 border border-gray-800 rounded-lg shadow-lg p-4 flex flex-row items-center gap-4 justify-center"
                         >
                           <input
@@ -145,10 +147,9 @@ const PlaylistWatch = () => {
                               e.target.checked = true
                               handleProgress(videoId);
                               e.target.disabled = true;
-                              
                             }}
-                            checked = {doneVideos.includes(videoId)}
-                            disabled = { doneVideos.includes(videoId)}
+                            checked={doneVideos.includes(videoId)}
+                            disabled={doneVideos.includes(videoId)}
                           />
                           <div
                             onClick={() => setCurrentVideo(videoId)}
@@ -197,6 +198,17 @@ const PlaylistWatch = () => {
             }
           </div>
         </div>
+      )}
+      {showModal && (
+        <>
+          <Modal
+            closeModal={() => setShowModal(false)}
+            shareText={`Hey there👋 I'm making progress in learning through the ${
+              data?.title ?? "Yotube"
+            } playlist 🎊 Join my journey!`}
+          />
+          <ConfettiContainer />
+        </>
       )}
     </div>
   );
