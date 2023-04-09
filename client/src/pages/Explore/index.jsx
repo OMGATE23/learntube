@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Sidebar from '../../components/Sidebar'
 import data from '../../data/explorePlaylist.json'
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link } from 'react-router-dom';
 
 const Explore = () => {
 
@@ -20,11 +20,11 @@ const Explore = () => {
         
         <Sidebar/>
         <div className=' mx-auto mb-20 w-[90%]'>
-            <div className=' flex  items-center justify-center h-[5rem]'>
-                <label className=' w-2/3 flex items-center gap-4 justify-center'>
-                    <span className='text-xl'>Search: </span>
-                    <input className='outline outline-1 px-4 text-gray-800 outline-gray-600 rounded-xl bg-gray-100 w-4/5 h-[2.5rem]' type='text' />
-                </label>
+            <div className=' flex mr-12 items-center justify-end h-[5rem]'>
+            <Link to = '/search'  className="text-lg transition-all duration-200 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-gray-200">
+              
+              <span className="hidden md:block">Go to Search</span>
+            </Link>
             </div>
         <div className='grid grid-cols-1 w-[80%] mx-auto md:grid-cols-3 gap-4 justify-items-center'>
         {
