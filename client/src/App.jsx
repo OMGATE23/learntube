@@ -48,7 +48,7 @@ function App() {
           element : <EnrolledPlaylist/>
         },
         {
-          path : 'playlistwatch',
+          path : 'playlistwatch/:id',
           element : <PlaylistWatch/>
         },
         {

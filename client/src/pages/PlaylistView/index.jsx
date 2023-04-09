@@ -7,7 +7,7 @@ import {
   ArrowDownOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import { useParams } from "react-router-dom";
-import { getPlaylistById } from "../../helper";
+import { enrollPlaylistById, getPlaylistById } from "../../helper";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -18,28 +18,27 @@ const PlaylistView = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
-  displayList = data.slice(lower, upper);
   const { id } = useParams();
+
+  function enrollPlaylist(){
+    enrollPlaylistById(id)
+  }
 
   useEffect(() => {
     async function getData() {
       const playlistData = await getPlaylistById(id);
-      setData(playlistData.contents);
+      setData(playlistData);
     }
-
     getData();
   }, []);
 
-  
-
   useEffect(() => {
-    if(!user) {
-      navigate("/")
+    if (!user) {
+      navigate("/");
     }
   }, [user]);
 
-  let displayList = data;
-  displayList = displayList.slice(lower, upper);
+  let displayList = data.contents;
   return (
     <div className="flex">
       <Sidebar />
@@ -48,7 +47,7 @@ const PlaylistView = () => {
           <h1 className="  my-6 text-gray-900 text-4xl font-semibold">
             {data.title}
           </h1>
-          <button className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-slate-200">
+          <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-slate-200">
             {" "}
             <ArrowDownOnSquareIcon width={20} />{" "}
             <span className="hidden md:block">Enroll Me</span>
@@ -57,7 +56,7 @@ const PlaylistView = () => {
 
         <div className="w-[70%] mx-auto grid grid-cols-1  justify-items-start">
           {displayList &&
-            displayList.map((video) => {
+            displayList.slice(lower, upper).map((video) => {
               let { lengthText, thumbnails, title, videoId } = video.video;
               return (
                 <div

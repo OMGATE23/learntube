@@ -32,10 +32,14 @@ exports.updateProgress = async (req, res) => {
 
 exports.getProgress = async (req, res) => {
   try {
-    const { playlistId, userId } = req.body;
+    const { playlistId } = req.params;
+    console.log(req.user)
+    const {_id} = req.user;
+
+    console.log(playlistId, _id);
 
     const userProgress = await UserProgress.findOne({
-        user_id: userId,
+        user_id: _id,
         playlist_id: playlistId
     });
 
@@ -51,6 +55,7 @@ exports.getProgress = async (req, res) => {
     });
   } catch(err) {
     return res.json({
+        header : req.headers,
         message : err.message
     })
   }

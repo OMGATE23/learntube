@@ -1,3 +1,5 @@
+import { API_URL } from "./helpers/constants";
+
 const options = {
   method: "GET",
   headers: {
@@ -33,3 +35,66 @@ export async function getPlaylistById(playlistId) {
         console.log(err)
     }
 }
+
+export async function enrollPlaylistById(playlistId){
+   try {
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(user._id , playlistId)
+
+    const response = await fetch(API_URL + "/user/enroll" , {
+        method : 'PUT',
+        body : JSON.stringify({
+            userId : user._id,
+            playlistId : playlistId
+        }),
+        headers: { 'Content-Type': 'application/json' },
+    })
+
+    const data = await response.json()
+    return (data)
+   } catch(err) {
+    console.log(err)
+   }
+}
+
+export async function getEnrolledPlaylists(token){
+    try {
+
+
+        const response = await fetch(API_URL + "/user/getuser" , {
+            method : 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'authorization' :  "Bearer " + token
+        
+        },
+        })
+        const data = await response.json()
+        console.log(data.user.enrolled_playlists)
+
+        return data.user.enrolled_playlists
+    } catch(err) {
+        console.log(err.message)
+    }
+}
+
+export async function updateVideoProgress(playlistId , videoId){
+    try {
+     const user = JSON.parse(localStorage.getItem('user'))
+ 
+     const response = await fetch(API_URL + "/user/updateprogress" , {
+         method : 'PUT',
+         body : JSON.stringify({
+             userId : user._id,
+             playlistId : playlistId,
+             videoId : videoId
+         }),
+         headers: { 'Content-Type': 'application/json' },
+     })
+ 
+     const data = await response.json()
+     return (data)
+    } catch(err) {
+     console.log(err)
+    }
+ }
