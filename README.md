@@ -11,7 +11,7 @@
 - Courses divided into categories for easy browsing and enrollment
 - Analysis graphs with a dashboard for tracking learning progress
 - Personalized course recommendations based on learners' interests and learning styles (coming soon)
-- Social features for connecting with other learners and sharing progress (coming soon)
+- Social features for connecting with other learners and sharing progress
 
 ### **Technologies Used 💻**
 
