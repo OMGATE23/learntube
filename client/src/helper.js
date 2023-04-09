@@ -117,18 +117,18 @@ export async function addPoint(token) {
   }
 }
 
-export async function getLeaderboard(){
+export async function getLeaderboard() {
   try {
     const response = await fetch(API_URL + "/user/leaderboard", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     });
 
-    const data = await response.json()
+    const data = await response.json();
     return data;
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
