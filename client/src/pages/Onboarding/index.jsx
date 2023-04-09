@@ -59,7 +59,7 @@ const Onboarding = () => {
             <div
             key = {el}
               className={`transition-all duration-150 text-white text-md px-4 outline-1 outline outline-white py-2 rounded-xl ${
-                isActive === el ? "bg-white text-purple-950" : "bg-transparent"
+                isActive === el ? "bg-white text-purple-900" : "bg-transparent"
               } hover:cursor-pointer w-[25%] text-center`}
               onClick={() => {
                 setIsActive(el);
