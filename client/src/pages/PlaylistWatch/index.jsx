@@ -31,6 +31,7 @@ const PlaylistWatch = () => {
     const response = await updateVideoProgress(id, videoId);
     showToast("Progress marked successfully!");
     getProgress();
+    setShowModal(true);
     const responsePoints = await addPoint(user.accessToken)
     console.log(responsePoints)
     
@@ -137,7 +138,7 @@ const PlaylistWatch = () => {
                       }
                       return (
                         <div
-                          key={videoId}
+                          key={Math.random()}
                           className=" w-[90%] transition-colors duration-150 my-4 border border-gray-800 rounded-lg shadow-lg p-4 flex flex-row items-center gap-4 justify-center"
                         >
                           <input
