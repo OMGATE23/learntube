@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, getAdditionalUserInfo } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { API_URL } from "../../helpers/constants";
 import axios from "axios";
@@ -21,6 +21,7 @@ const SignIn = () => {
     setError();
     try {
       const res = await signInWithPopup(auth, provider);
+      const { isNewUser } = getAdditionalUserInfo(res)
       const userBody = {
         name: res.user.displayName,
         email: res.user.email,
@@ -39,7 +40,11 @@ const SignIn = () => {
         })
       );
 
-      navigate("/dashboard");
+      if(isNewUser) {
+        navigate("/onboarding");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {
       console.log(err);
       setError("Something went wrong :(");
