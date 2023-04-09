@@ -5,10 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { getPlaylistBySearch } from "../../helper";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Loader from "../../components/Loader";
 
 const Search = () => {
   const [query , setQuery] = useState('')
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(false);
 
   const { user } = useAuthContext();
   const navigate = useNavigate();
@@ -20,9 +22,16 @@ const Search = () => {
   }, [user]);
 
   async function handleSearch(){
-    if(query){
-      const playlistData = await getPlaylistBySearch(query)
-      setData(playlistData.contents)
+    setLoading(true);
+    try {
+      if(query){
+        const playlistData = await getPlaylistBySearch(query)
+        setData(playlistData.contents)
+      }
+    } catch(err) {
+
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -45,9 +54,10 @@ const Search = () => {
             </button>
           </label>
         </div>
+        {loading && <Loader />}
         <div className='grid grid-cols-1 w-[80%] mx-auto my-4 mb-12 lg:grid-cols-3 gap-4 justify-items-center'>
         {
-            data && data.map(playlist => {
+            data && !loading && data.map(playlist => {
                 let {channelName , playlistId , thumbnails,  title , videoCount} = playlist.playlist
 
                 if(title.length > 30){

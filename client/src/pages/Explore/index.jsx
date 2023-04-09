@@ -43,7 +43,8 @@ const Explore = () => {
               channelName = channelName.substring(0, 17) + "...";
             }
             return (
-              <div
+              <Link
+                to={`/playlistview/${playlistId}`}
                 key={playlistId}
                 className=" transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 "
               >
@@ -51,7 +52,7 @@ const Explore = () => {
                 <p className="text-lg mt-4 text-white">{title}</p>
                 <p className="text-gray-400">{channelName}</p>
                 <p className="text-gray-500">No of videos : {videoCount}</p>
-              </div>
+              </Link>
             );
           })}
         </div>

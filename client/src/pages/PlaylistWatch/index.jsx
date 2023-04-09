@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getPlaylistById, updateVideoProgress } from "../../helper";
 import axios from "axios";
 import { API_URL } from "../../helpers/constants";
+import Loader from "../../components/Loader";
+import { showToast } from "../../helpers/showtoast,js";
 
 const PlaylistWatch = () => {
   const [lower, setLower] = useState(0);
@@ -16,6 +18,7 @@ const PlaylistWatch = () => {
   const [showMore, setShowMore] = useState(false);
   const [currentVideo, setCurrentVideo] = useState();
   const [progressVideoList , setProgressVideoList] = useState([])
+  const [loading, setLoading] = useState(false);
   let displayList;
 
   const { user } = useAuthContext();
@@ -23,6 +26,7 @@ const PlaylistWatch = () => {
 
   async function handleProgress(videoId) {
     const response = await updateVideoProgress(id, videoId);
+    showToast("Progress marked successfully!")
     getProgress();
   }
 
@@ -37,7 +41,6 @@ const PlaylistWatch = () => {
 
   async function getProgress() {
     try {
-      console.log(user.accessToken);
       const res = await fetch(`${API_URL}/user/getprogress/${id}`, {
         method: "GET",
         headers: {
@@ -46,8 +49,6 @@ const PlaylistWatch = () => {
         },
       });
       const data = await res.json();
-      console.log("-----------------------------");
-      console.log(data.userProgress.video_id);
       setProgressVideoList(data.userProgress.video_id)
     } catch (err) {
       console.log(err);
@@ -55,9 +56,11 @@ const PlaylistWatch = () => {
   }
 
   async function handlePlaylist() {
+    setLoading(true);
     const playlist = await getPlaylistById(id);
     console.log(playlist)
     setData(playlist);
+    setLoading(false);
   }
   useEffect(() => {
     handlePlaylist();
@@ -66,9 +69,23 @@ const PlaylistWatch = () => {
   useEffect(() => {
     setCurrentVideo(data?.contents[0].video.videoId);
   }, [data]);
-  displayList = data?.contents;
+  displayList = data?.contents || [];
   displayList = displayList?.slice(lower, upper);
   const doneVideos = progressVideoList.map(el => el.videoId);
+
+
+  if(loading) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="w-[90%">
+          <Loader />
+        </div>
+      </div>
+    )
+  }
+
+
   return (
     <div className="flex">
       <Sidebar />

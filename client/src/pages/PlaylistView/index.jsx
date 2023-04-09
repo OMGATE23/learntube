@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import { enrollPlaylistById, getPlaylistById } from "../../helper";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader";
+import { showToast } from "../../helpers/showtoast,js";
 
 const PlaylistView = () => {
   const [lower, setLower] = useState(0);
@@ -17,18 +19,25 @@ const PlaylistView = () => {
   const [data, setData] = useState([]);
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
-  function enrollPlaylist(){
-    enrollPlaylistById(id)
+  async function enrollPlaylist(){
+    await enrollPlaylistById(id)
+    showToast("Enrolled successfully!")
     navigate(`/playlistwatch/${id}`)
   }
 
   useEffect(() => {
     async function getData() {
-      const playlistData = await getPlaylistById(id);
-      setData(playlistData);
+      setLoading(true);
+      try {
+        const playlistData = await getPlaylistById(id);
+        setData(playlistData);
+      } catch(err) {
+      }
+      setLoading(false);
     }
     getData();
   }, []);
@@ -40,6 +49,18 @@ const PlaylistView = () => {
   }, [user]);
 
   let displayList = data.contents;
+
+  if(loading) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="w-[90%">
+          <Loader />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex">
       <Sidebar />
@@ -48,11 +69,15 @@ const PlaylistView = () => {
           <h1 className="text-white my-6 text-4xl font-semibold">
             {data.title}
           </h1>
-          <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-green-600">
+          {
+            data?.contents && data?.contents.length > 0 && (
+              <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-green-600">
             {" "}
             <ArrowDownOnSquareIcon width={20} className="text-white" />{" "}
             <span className="hidden md:block text-white">Enroll Me</span>
           </button>
+            )
+          }
         </div>
 
         <div className="w-[70%] mx-auto grid grid-cols-1  justify-items-start">
@@ -74,7 +99,7 @@ const PlaylistView = () => {
             })}
         </div>
 
-        {data && (
+        {data && data.length!==0 && data?.contents && (
           <div className="flex w-fit mx-auto gap-6  my-6">
             <button
               className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed text-white hover:text-black"

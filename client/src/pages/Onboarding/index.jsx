@@ -33,7 +33,9 @@ const Onboarding = () => {
           headers: { 'Content-Type': 'application/json' },
       })
   
-      const data = await response.json()
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/dashboard");
       return (data)
      } catch(err) {
       console.log(err)
@@ -56,9 +58,9 @@ const Onboarding = () => {
           {CATEGORY_LIST.map((el) => (
             <div
             key = {el}
-              className={`transition-all duration-150 text-white text-xl px-4 outline-1 outline outline-white py-2 rounded-xl ${
+              className={`transition-all duration-150 text-white text-md px-4 outline-1 outline outline-white py-2 rounded-xl ${
                 isActive === el ? "bg-white text-purple-950" : "bg-transparent"
-              } hover:cursor-pointer`}
+              } hover:cursor-pointer w-[25%] text-center`}
               onClick={() => {
                 setIsActive(el);
               }}
@@ -66,7 +68,7 @@ const Onboarding = () => {
               {el}
             </div>
           ))}
-          <button className="transition-all duration-150 text-white text-2xl mt-4 outline-2 outline-white outline px-4 py-2 rounded-sm font-semibold hover:bg-white hover:text-purple-950" onClick={submitCategoryHandler}>Submit</button>
+          <button className="transition-all duration-150 text-white text-xl mt-4 outline-2 outline-white outline px-4 py-2 rounded-sm font-semibold hover:bg-white hover:text-purple-950" onClick={submitCategoryHandler}>Submit</button>
         </div>
       </div>
     </div>

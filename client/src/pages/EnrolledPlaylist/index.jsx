@@ -7,13 +7,18 @@ import {
   getPlaylistById,
   getPlaylistBySearch,
 } from "../../helper";
+import Loader from "../../components/Loader";
 
 const EnrolledPlaylist = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [playlistData, setPlaylistData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function enrolledPlaylistHandler() {
+    setLoading(true);
+
+    try {
     const list = await getEnrolledPlaylists(user.accessToken);
     const response = await getPlaylistBySearch(list[0]);
     console.log(response.contents[0].playlist);
@@ -23,12 +28,17 @@ const EnrolledPlaylist = () => {
     for (let i = 0; i < list.length; i++) {
       const response = await getPlaylistBySearch(list[i]);
       console.log(i, list[i], response);
-      if (response.contents[0]) {
+      if (response.contents && response.contents[0]) {
         data.push(response.contents[0].playlist);
       }
     }
     console.log(data);
     setPlaylistData(data);
+  } catch(err) {
+
+  } finally {
+    setLoading(false);
+  }
   }
 
   useEffect(() => {
@@ -42,7 +52,16 @@ const EnrolledPlaylist = () => {
 
   }, [user]);
 
-  console.log(playlistData);
+  if(loading) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="w-[90%">
+          <Loader />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex">

@@ -6,10 +6,12 @@ import axios from "axios";
 import { API_URL } from "../../helpers/constants";
 import { BarChart } from "../../components/Chart";
 import { getDashboardData } from "./getDashboardData";
+import Loader from "../../components/Loader";
 
 const Dashboard = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [dashboardData, setDashboardData] = useState({
     enrolledPlaylistCount: 0,
     videoCount: 0,
@@ -26,6 +28,7 @@ const Dashboard = () => {
 });
 
   useEffect(() => {
+    setLoading(true);
     if (!localStorage.getItem("user")) {
       navigate("/");
     }
@@ -33,6 +36,7 @@ const Dashboard = () => {
     if(user) {
       fetchUser();
     }
+    setLoading(false);
   }, [user]);
 
   async function fetchUser() {
@@ -47,6 +51,17 @@ const Dashboard = () => {
   }
 
   const userName = JSON.parse(localStorage.getItem("user")).name;
+
+  if(loading) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="w-[90%">
+          <Loader />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex">
