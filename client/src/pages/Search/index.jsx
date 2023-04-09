@@ -38,7 +38,7 @@ const Search = () => {
               placeholder="Search Playlists"
               onChange = {(e) => setQuery(e.target.value)}
             />
-            <button onClick={handleSearch} className="text-lg border flex gap-1 border-gray-700 py-2 px-4 rounded-xl">
+            <button onClick={handleSearch} className="text-lg text-white border flex gap-1 border-gray-700 py-2 px-6 rounded-xl">
               {" "}
               <MagnifyingGlassIcon width={20} />{" "}
               <span className="hidden md:block">Search</span>
@@ -58,11 +58,11 @@ const Search = () => {
                     channelName = channelName.substring(0 , 17) + "..."
                 }
                 return(
-                    <Link to={"/playlistview/" + playlistId} key = {playlistId} className=' transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer hover:bg-gray-100'>
+                    <Link to={"/playlistview/" + playlistId} key = {playlistId} className=' transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 '>
                         <img src = {thumbnails[3].url} alt = {title}/>
-                        <p className='text-lg mt-4'>{title}</p>
-                        <p className='text-gray-700'>{channelName}</p>
-                        <p>No of videos : {videoCount}</p>
+                        <p className='text-lg mt-4 text-white'>{title}</p>
+                        <p className='text-gray-400'>{channelName}</p>
+                        <p className="text-gray-500">No of videos : {videoCount}</p>
                     </Link>
                 )
             })
