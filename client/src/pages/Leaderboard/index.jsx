@@ -7,7 +7,7 @@ const index = () => {
 
   const [topLearners, setTopLearners] = useState([]);
   const [totalLearners, setTotalLearners] = useState();
-
+console.log("here")
   useEffect(() => {
     async function fetchLeaderboard() {
       const data = await getLeaderboard();
