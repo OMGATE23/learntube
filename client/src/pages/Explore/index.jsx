@@ -1,20 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/Sidebar";
 import data from "../../data/explorePlaylist.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { MagnifyingGlassIcon   } from "@heroicons/react/24/outline";
+import { getPlaylistBySearch } from "../../helper";
 
 const Explore = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const [data , setData] = useState()
 
   useEffect(() => {
     if (!user) {
       navigate("/");
     }
   }, [user]);
+  async function handleExplore() {
+    let user = JSON.parse(localStorage.getItem('user'))
+    const response = await getPlaylistBySearch(user.category)
+    setData(response.contents)
+  }
 
+  useEffect(() => {
+      handleExplore() 
+  } , [])
   return (
     <div className="flex">
       <Sidebar />
@@ -30,8 +40,7 @@ const Explore = () => {
           </Link>
         </div>
         <div className="grid grid-cols-1 w-[80%] mx-auto md:grid-cols-3 gap-4 justify-items-center">
-          {data.map((playlist) => {
-            console.log(playlist.playlist);
+          {data && data.map((playlist) => {
             let { channelName, playlistId, thumbnails, title, videoCount } =
               playlist.playlist;
 

@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPlaylistById, updateVideoProgress } from "../../helper";
+import { addPoint, getPlaylistById, updateVideoProgress } from "../../helper";
 import axios from "axios";
 import { API_URL } from "../../helpers/constants";
 import Loader from "../../components/Loader";
@@ -31,7 +31,9 @@ const PlaylistWatch = () => {
     const response = await updateVideoProgress(id, videoId);
     showToast("Progress marked successfully!");
     getProgress();
-    setShowModal(true);
+    const responsePoints = await addPoint(user.accessToken)
+    console.log(responsePoints)
+    
   }
 
   useEffect(() => {
@@ -62,7 +64,6 @@ const PlaylistWatch = () => {
   async function handlePlaylist() {
     setLoading(true);
     const playlist = await getPlaylistById(id);
-    console.log(playlist);
     setData(playlist);
     setLoading(false);
   }
@@ -81,7 +82,7 @@ const PlaylistWatch = () => {
     return (
       <div className="flex">
         <Sidebar />
-        <div className="w-[90%">
+        <div className="w-[90%]">
           <Loader />
         </div>
       </div>
@@ -142,10 +143,7 @@ const PlaylistWatch = () => {
                           <input
                             type="checkbox"
                             onClick={(e) => {
-                              e.target.checked = true;
-
-                              console.log(e.target.checked);
-                              console.log(e.target);
+                              e.target.checked = true
                               handleProgress(videoId);
                               e.target.disabled = true;
                             }}
