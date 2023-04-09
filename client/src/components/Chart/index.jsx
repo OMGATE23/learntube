@@ -25,7 +25,7 @@ export const options = {
   plugins: {
     title: {
       display: true,
-      text: 'Ear Care Analysis',
+      text: 'Study Analysis',
     },
   },
 };
@@ -34,9 +34,6 @@ const labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 
 
 export function BarChart({chartData}) {
-
-  const [earData, setEarData] = useState(chartData)
-
 
 //   useEffect(() => {
 //     let earData = JSON.parse(localStorage.getItem("eardata"));
@@ -47,9 +44,9 @@ export function BarChart({chartData}) {
     labels,
     datasets: [
       {
-        label: 'Earphone Usage Time',
-        data: earData,
-        backgroundColor: 'rgba(0, 153, 246, 0.5)',
+        label: 'Number of videos completed',
+        data: chartData,
+        backgroundColor: 'rgba(0, 153, 246, 1)',
       }
     ],
   };
