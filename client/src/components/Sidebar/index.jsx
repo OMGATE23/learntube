@@ -18,7 +18,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=" sticky top-0 left-0 h-[100vh] w-[5rem] lg:w-[20%] flex items-center border-r-4 border-gray-200">
+    <div className=" sticky top-0 left-0 h-[100vh] w-[5rem] lg:w-[20%] flex items-center border-r border-gray-500 text-white">
       
 
       <div className=" flex flex-col w-full mb-36">
