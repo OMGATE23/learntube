@@ -57,15 +57,15 @@ const Dashboard = () => {
 
       <div className="h-[90vh] flex flex-col lg:flex-row items-center justify-between gap-12">
         
-        <div className="w-[70%] h-[70vh] rounded-xl px-8 py-4 outline outline-1 ml-6 shadow-2xl  text-white">
+        <div className="w-[70%] h-[70vh] rounded-xl px-8 py-4 ml-6 shadow-2xl  text-white border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
           <BarChart chartData={Object.values(dashboardData.analysis)} />
         </div>
 
         <div className="w-[30%] text-white flex flex-col items-center gap-8">
-          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center border border-gray-500 bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50">
+          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
             No.of Playlists <div className="text-5xl">{dashboardData.enrolledPlaylistCount}</div>
           </div>
-          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center px-2 border border-gray-500 bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50">
+          <div className="flex flex-col rounded-xl text-2xl justify-center gap-6 w-[250px] aspect-square text-center px-2 border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 ">
             Videos Watched <div className="text-5xl">{dashboardData.videoCount}</div>
           </div>
         </div>
