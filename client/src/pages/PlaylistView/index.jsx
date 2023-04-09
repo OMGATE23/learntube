@@ -68,7 +68,7 @@ const PlaylistView = () => {
             {data.title}
           </h1>
           {
-            Array.isArray(data) && data.length > 0 && (
+            data?.contents && data.length > 0 && (
               <button onClick = {enrollPlaylist} className="text-lg transition-colors duration-150 mb-4 border flex gap-1 border-gray-700 py-2 px-4 rounded-xl hover:bg-green-600">
             {" "}
             <ArrowDownOnSquareIcon width={20} className="text-white" />{" "}
@@ -97,7 +97,7 @@ const PlaylistView = () => {
             })}
         </div>
 
-        {data && data.length!==0 && Array.isArray(data) && (
+        {data && data.length!==0 && data?.contents && (
           <div className="flex w-fit mx-auto gap-6  my-6">
             <button
               className="rounded-xl transition-all duration-200 hover:bg-gray-200 flex items-center outline-1 outline py-2 px-4 disabled:text-gray-500 disabled:cursor-not-allowed text-white hover:text-black"
