@@ -1,19 +1,29 @@
-import React from 'react'
-import Sidebar from '../../components/Sidebar'
+import React from "react";
+import Sidebar from "../../components/Sidebar";
+import Navbar from "../../components/Navbar";
 
 const LandingPage = () => {
   return (
-    <div>
-        
-        <div className='h-[100vh] flex flex-col justify-center outline outline-2 bg-gray-50 text-center'>
-    
-        <h1 className='text-8xl font-bold'><span className='text-red-600'>YouTube</span> <span className='text-gray-900'>Courses</span></h1>
-        <p className='mt-2 text-gray-700 text-lg'>"Unlock the Power of YouTube Learning with Our Course-Boosting App!"</p>
-        <a href = '/signin' className=' transition-all duration-200 border-2 w-[10rem] py-2 mt-6 text-lg font-semibold border-gray-800 rounded-2xl mx-auto hover:text-white hover:bg-gray-800'>Sign In!</a>
+    <div className="bg-backgroundClr">
+      <Navbar />
+      <div className="h-[90vh] flex flex-col justify-center items-center text-center">
+        <img src="./logo.png" alt="LearnTube logo" width="120" height="120" />
+        <h1 className="text-8xl font-bold">
+          <span className="text-white">Learn</span>
+          <span className="text-red-600">Tube</span>
+        </h1>
+        <p className="mt-2 text-gray-400 text-lg">
+          Unlock the Power of YouTube Learning with Our Course-Boosting App!
+        </p>
+        <a
+          href="/signin"
+          className=" transition-all bg-red-600 duration-200 border-2 py-2 px-8 mt-6 text-lg font-medium border-gray-800 rounded-lg mx-auto hover:text-white hover:bg-gray-800"
+        >
+          Get Started!
+        </a>
+      </div>
     </div>
-    </div>
-    
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;
