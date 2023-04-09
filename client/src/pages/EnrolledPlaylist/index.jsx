@@ -48,7 +48,7 @@ const EnrolledPlaylist = () => {
     <div className="flex">
       <Sidebar />
       <div className="w-[70%]  mb-12 mx-auto">
-        <h1 className="my-6 text-gray-900 text-4xl font-semibold">
+        <h1 className="my-6 text-4xl font-semibold text-white">
           Enrolled Playlists
         </h1>
         <div className="grid grid-cols-1 w-[90%] mx-auto md:grid-cols-3 gap-8 justify-items-center">
@@ -68,12 +68,13 @@ const EnrolledPlaylist = () => {
                 <Link
                   to={"/playlistwatch/" + playlistId}
                   key={playlistId}
-                  className=" transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer hover:bg-gray-100"
+                  className=" transition-all duration-200  w-[300px] h-[300px] text-center rounded-xl shadow-xl p-6 hover:cursor-pointer
+                  border-2 border-[rgba(30,224,224,.2)] bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50 "
                 >
                   <img src={thumbnails[3].url} alt={title} />
-                  <p className="text-lg mt-4">{title}</p>
-                  <p className="text-gray-700">{channelName}</p>
-                  <p>No of videos : {videoCount}</p>
+                  <p className="text-gray-200 mt-4">{title}</p>
+                  <p className="text-gray-300">{channelName}</p>
+                  <p className="text-gray-400">No of videos : {videoCount}</p>
                 </Link>
               );
             })}

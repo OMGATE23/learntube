@@ -56,6 +56,7 @@ const PlaylistWatch = () => {
 
   async function handlePlaylist() {
     const playlist = await getPlaylistById(id);
+    console.log(playlist)
     setData(playlist);
   }
   useEffect(() => {
@@ -73,12 +74,12 @@ const PlaylistWatch = () => {
       <Sidebar />
       {data && (
         <div className="w-[90%]">
-          <h1 className="text-3xl mt-8 ml-6 font-bold text-gray-900">
-            Video Section
+          <h1 className="text-3xl mt-8 ml-6 font-bold text-white">
+            {data?.title}
           </h1>
           <div className=" flex mt-8 flex-col lg:flex-row">
             <div className=" w-[90%] lg:w-2/3 mb-12 mx-auto  lg:ml-8">
-              <div className="bg-gray-200 shadow-xl mx-auto py-4 px-6">
+              <div className="shadow-xl mx-auto py-4 px-6 border border-gray-500 bg-base-100/10 bg-gradient-to-r from-transparent to-base-100/50">
                 <iframe
                   className="w-full aspect-video"
                   src={"https://www.youtube.com/embed/" + currentVideo}
@@ -87,8 +88,8 @@ const PlaylistWatch = () => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
-                <p className="text-2xl font-medium ml-4 mt-2 mb-2">
-                  Video Title
+                <p className="text-2xl font-medium ml-4 mt-2 mb-2 text-gray-300">
+                  {data?.title}
                 </p>
                 {/* {data && (
                   <p className="w-[95%] ml-4 text-gray-700">
@@ -98,7 +99,7 @@ const PlaylistWatch = () => {
                   </p>
                 )} */}
                 <button
-                  className="ml-4"
+                  className="ml-4 text-gray-400"
                   onClick={() => setShowMore((prev) => !prev)}
                 >
                   Show {!showMore ? <span>More</span> : <span>Less</span>}
@@ -106,7 +107,7 @@ const PlaylistWatch = () => {
               </div>
             </div>
             {
-              <div className=" w-full lg:w-1/3 mx-auto">
+              <div className="w-full lg:w-1/3 mx-auto h-[80vh] overflow-y-scroll">
                 <div className="w-[80%] mx-auto grid grid-cols-1  justify-items-center ">
                   {displayList &&
                     displayList.map((video) => {
@@ -117,7 +118,7 @@ const PlaylistWatch = () => {
                       return (
                         <div
                           key={videoId}
-                          className=" w-[90%] transition-colors duration-150 my-4 border border-gray-800 rounded-lg shadow-lg p-4 flex flex-row items-center gap-4 justify-center hover:bg-slate-100  "
+                          className=" w-[90%] transition-colors duration-150 my-4 border border-gray-800 rounded-lg shadow-lg p-4 flex flex-row items-center gap-4 justify-center"
                         >
                           <input
                             type="checkbox"
@@ -137,8 +138,8 @@ const PlaylistWatch = () => {
                             onClick={() => setCurrentVideo(videoId)}
                             className="w-[80%] text-center hover:cursor-pointer lg:text-left"
                           >
-                            <p>{title}</p>
-                            <p>{lengthText}</p>
+                            <p className="text-gray-300">{title}</p>
+                            <p className="text-gray-400">{lengthText}</p>
                           </div>
                         </div>
                       );
