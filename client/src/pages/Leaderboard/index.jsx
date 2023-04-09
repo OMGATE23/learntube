@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react'
-import Sidebar from '../../components/Sidebar'
-import { getLeaderboard } from '../../helper'
+import React, { useEffect, useState } from "react";
+import Sidebar from "../../components/Sidebar";
+import { getLeaderboard } from "../../helper";
+import Leaderboard from "../../components/Leaderboardd";
 
-const Leaderboard = () => {
-    useEffect(() => {
-        getLeaderboard()
-    } , [])
+const index = () => {
+
+  const [topLearners, setTopLearners] = useState([]);
+  const [totalLearners, setTotalLearners] = useState();
+
+  useEffect(() => {
+    async function fetchLeaderboard() {
+      const data = await getLeaderboard();
+      console.log("Data", data);
+      setTopLearners(data.users);
+      setTotalLearners(data.length);
+    }
+    fetchLeaderboard();
+  }, []);
   return (
-    <div className='flex'>
-        <Sidebar/>
-        Leaderboard
+    <div className="flex">
+      <Sidebar />
+      <div className="w-[90%]">
+          <Leaderboard topLearners={topLearners} totalLearners={totalLearners} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Leaderboard
+export default index;

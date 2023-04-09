@@ -40,7 +40,7 @@ function getRankImage(rank) {
   }
 }
 
-const Card = ({ rank, name, profileUrl, totalSections = 0 }) => {
+const Card = ({ rank, name, totalSections = 0 }) => {
   return (
     <div className="leaderboard-card card">
       <div>
@@ -48,7 +48,6 @@ const Card = ({ rank, name, profileUrl, totalSections = 0 }) => {
           <img src={getRankImage(rank)} alt="" />
         </div>
         <div className="profile">
-          <img src={profileUrl} alt="" />
         </div>
         <div>{name}</div>
       </div>

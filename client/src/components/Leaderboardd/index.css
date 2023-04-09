@@ -1,12 +1,19 @@
 .leaderboard-container {
     display: flex;
     height: 100%;
+    color: white;
+    padding: 2rem;
+}
+
+.leaderboard-container h1 {
+    font-size: 2rem;
+    margin-bottom: 6rem;
 }
 
 .leaderboard-container .stats {
     width: 30%;
     padding: 6rem 2rem 0 2rem;
-    font-family: var(--ff-mono);
+    font-family: 'Poppins';
     border-left: 1px solid rgb(163, 168, 195, 0.2);
     text-align: center;
 }
@@ -33,9 +40,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem 1rem 2rem;
     position: relative;
     font-size: 1.1rem;
+    border: 1px solid #6d28d9;
+    border-radius: 5px;
+    padding: 2rem 4rem;
+    background-image: linear-gradient(to right,
+            rgb(83, 83, 83, 0),
+            rgb(83, 83, 83, 0.1));
+    border: 2px solid rgb(30, 224, 224, 0.2);
 }
 
 .leaderboard-card div:nth-child(1) {
@@ -59,7 +72,7 @@
 }
 
 .leaderboard .points {
-    font-family: var(--ff-mono);
+    font-family: 'Poppins';
     font-size: 1.1rem;
 }
 
