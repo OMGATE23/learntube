@@ -13,6 +13,7 @@ import Onboarding from "./pages/Onboarding";
 import { AuthContextProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -56,6 +57,10 @@ function App() {
           path: "dashboard",
           element: <Dashboard />,
         },
+        {
+          path : "leaderboard",
+          element : <Leaderboard/>
+        }
       ],
     },
   ]);

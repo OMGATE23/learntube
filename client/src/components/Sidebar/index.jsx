@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { DocumentIcon ,ComputerDesktopIcon , MagnifyingGlassIcon , VideoCameraIcon , ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
+import { DocumentIcon ,ComputerDesktopIcon , MagnifyingGlassIcon , VideoCameraIcon , ArrowRightOnRectangleIcon , ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
 import { auth } from "../../config/firebase";
 
 const Sidebar = () => {
@@ -51,6 +51,14 @@ const Sidebar = () => {
             <MagnifyingGlassIcon className="w-[26px] lg:w-[20px]" width={20} />
             <span className="hidden lg:block  py-3 text-center text-xl ">
               Search
+            </span>
+          </div>
+        </Link>
+        <Link to="/leaderboard" className="block">
+          <div className="flex justify-center lg:justify-start gap-4  w-2/3 mx-auto my-4 lg:my-0">
+            <ArrowTrendingUpIcon className="w-[26px] lg:w-[20px]" width={20} />
+            <span className="hidden lg:block  py-3 text-center text-xl ">
+              Leaderboard
             </span>
           </div>
         </Link>
