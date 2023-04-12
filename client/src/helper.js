@@ -1,11 +1,11 @@
 import { API_URL } from "./helpers/constants";
 
 const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "96ff7fd609msh42f0999ddc4f585p157691jsn1f6a8eaf3666",
-    "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
-  },
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '8356964a39msh9394561db12e741p1463dfjsna9741ca5b7e5',
+		'X-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com'
+	}
 };
 
 export async function getPlaylistBySearch(query) {
