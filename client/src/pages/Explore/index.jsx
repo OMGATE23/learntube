@@ -5,11 +5,13 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { MagnifyingGlassIcon   } from "@heroicons/react/24/outline";
 import { getPlaylistBySearch } from "../../helper";
+import Loader from "../../components/Loader";
 
 const Explore = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const [data , setData] = useState()
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -17,14 +19,28 @@ const Explore = () => {
     }
   }, [user]);
   async function handleExplore() {
+    setLoading(true);
     let user = JSON.parse(localStorage.getItem('user'))
     const response = await getPlaylistBySearch(user.category)
+    setLoading(false);
     setData(response.contents)
   }
 
   useEffect(() => {
       handleExplore() 
   } , [])
+
+  if(loading) {
+    return (
+      <div className="flex">
+        <Sidebar />
+        <div className="w-[90%]">
+          <Loader />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex">
       <Sidebar />
