@@ -14,6 +14,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Leaderboard from "./pages/Leaderboard";
+import NavRoutes from "./Routes";
 
 function App() {
   const router = createBrowserRouter([
@@ -67,7 +68,8 @@ function App() {
   return (
     <div className="App font-poppins">
       <AuthContextProvider>
-        <RouterProvider router={router} />
+        {/* <RouterProvider router={router} /> */}
+        <NavRoutes />
       </AuthContextProvider>
       <ToastContainer
         position="top-right"
